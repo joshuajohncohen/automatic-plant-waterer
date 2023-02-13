@@ -1,0 +1,20 @@
+name: nim-plant-waterer
+type: sw.application
+joinable: false
+description: >-
+  Joshua Cohen's automatic plant waterer for CCT
+post-provisioning: >-
+  This text intentionally left blank
+assets:
+  repository:
+    type: blob.asset
+    data:
+      url: 'https://github.com/joshuajohncohen/automatic-plant-waterer'
+  logo:
+    type: blob.asset
+    data:
+      url: 'https://github.com/nim-lang/website/raw/master/jekyll/assets/img/logo.png'
+data:
+  supportedDeviceTypes:
+    - fincm3
+version: 0.0.1

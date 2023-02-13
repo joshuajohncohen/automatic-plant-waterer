@@ -1,16 +1,21 @@
 # see more about dockerfile templates here: https://www.balena.io/docs/learn/develop/dockerfile/
 FROM balenalib/%%BALENA_MACHINE_NAME%%-ubuntu:build
 
-# use `install_packages` if you need to install dependencies,
-RUN install_packages nim git
-
 # Set our working directory
 WORKDIR /usr/src/plantwaterer
 
+# use `install_packages` if you need to install dependencies,
+RUN install_packages git gcc
+
 # This will copy all files in our root to the working  directory in the container
-COPY plantwaterer/ ./
+COPY . ./
 
-
+# Clone Nim
+RUN git clone https://github.com/nim-lang/Nim.git
+# Build nim binary
+RUN cd Nim; ./build_all.sh; cd ..
+# Add Nim binaries to PATH
+ENV PATH="/usr/src/app/Nim/bin:${PATH}"
 
 # Enable udevd so that plugged dynamic hardware devices show up in our container.
 ENV UDEV=1
